@@ -1,0 +1,39 @@
+---
+title: "Entity Matching with R"
+output: html_document
+---
+
+
+
+```{r}
+install.packages("tm");
+install.packages("SnowballC");
+install.packages("RTextTools");
+library("RTextTools");
+library("tm");
+library("SnowballC");
+
+worder1<- c("I am taking","these are the samples",
+"He speaks differently","This is distilled","It was placed")
+df1 <- data.frame(id=1:5, words=worder1)
+
+matrix <- create_matrix(df1, stemWords=TRUE, removeStopwords=FALSE, minWordLength=2)
+colnames(matrix) # SEE THE STEMMED TERMS
+as.matrix(matrix);
+
+
+
+wordStem(c("win", "winning", "winner", "won"));
+
+
+# Test the supplied vocabulary
+for(lang in getStemLanguages()) {
+load(system.file("words", paste0(lang, ".RData"), package="SnowballC"))
+stopifnot(all(wordStem(voc[[1]], lang) == voc[[2]]))
+}
+
+
+
+
+
+```
